@@ -18,6 +18,8 @@ class EntriesController < ApplicationController
       @entry["description"] = params["description"]
       @entry["occurred_on"] = params["occurred_on"]
       @entry["user_id"] = current_user.id
+      image_params = params.permit(:image)
+      @entry.image = image_params[:image] if image_params[:image].present?
       @entry.save
       redirect_to "/places/#{@place.id}"
     end

@@ -9,6 +9,13 @@
   <% for entry in @entries %>
     <div class="col-12 col-md-4 mb-4">
       <div class="card h-100">
+        <% if entry.image.attached? %>
+          <%= image_tag entry.image, class: "card-img-top img-fluid" %>
+        <% else %>
+          <div class="bg-secondary d-flex align-items-center justify-content-center" style="height: 200px;">
+            <span class="text-white">No Image</span>
+          </div>
+        <% end %>
         <div class="card-body">
           <h5 class="card-title"><%= entry["title"] %></h5>
           <h6 class="card-subtitle mb-2 text-muted"><%= entry["occurred_on"] %></h6>
