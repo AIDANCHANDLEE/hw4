@@ -4,3 +4,9 @@
 require_relative "config/application"
 
 Rails.application.load_tasks
+
+# No asset pipeline in this app (Bootstrap loaded via CDN, CSS in public/)
+namespace :assets do
+  task :precompile do; end
+  task :clean do; end
+end
