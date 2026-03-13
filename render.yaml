@@ -1,0 +1,24 @@
+databases:
+  - name: hw4-db
+    databaseName: hw4
+    user: hw4
+    plan: free
+
+services:
+  - type: web
+    name: hw4
+    runtime: ruby
+    plan: free
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -t 5:5 -p ${PORT:-3000} -e ${RAILS_ENV:-production}"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: hw4-db
+          property: connectionString
+      - key: RAILS_ENV
+        value: production
+      - key: RAILS_SERVE_STATIC_FILES
+        value: true
+      - key: SECRET_KEY_BASE
+        generateValue: true
